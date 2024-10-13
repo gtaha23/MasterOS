@@ -84,7 +84,7 @@ namespace MamacOS
             {
                 Console.Clear();
                 Console.WriteLine("                    ########  ########    OS Name: MasterOS");
-                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.09");
+                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.10");
                 Console.WriteLine(" ######### ####  ##      ### ######       Creator: MasterCode Studios");
                 Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.3.8 ");
                 Console.WriteLine("###  ###  #### ##     ### ##    ####      Current File: Kernel.cs");
