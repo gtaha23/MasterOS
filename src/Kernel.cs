@@ -50,6 +50,7 @@ namespace MamacOS
                 Console.WriteLine("-> color");
                 Console.WriteLine("-> color2");
                 Console.WriteLine("-> otokarl");
+                Console.WriteLine("-> FAQs");
                 Console.WriteLine("=====Game Zone=====");
                 Console.WriteLine("-> Lab0");
             }
