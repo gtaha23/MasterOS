@@ -17,4 +17,4 @@ The O.S with yellow text used with color2 command displaying the good ol' oldfet
 
 Some of the oldest versions of MasterOS
 
-![Ekran görüntüsü 2024-06-30 141054](https://github.com/user-attachments/assets/bb354ead-e64a-49a4-865c-2332ad0b5fce)
+
