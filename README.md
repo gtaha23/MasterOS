@@ -17,4 +17,4 @@ The O.S with yellow text used with color2 command displaying the good ol' oldfet
 
 Some of the oldest versions of MasterOS
 
-
+![MamacOS](https://github.com/user-attachments/assets/9335a661-83f5-40f3-8af7-0a1e05bd21bc)
