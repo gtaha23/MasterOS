@@ -21,6 +21,7 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 ## Windows
 - Cosmos
 - VS2022
+- C# Desktop Development with .NET
 - VMware
 
 # Screenshots
