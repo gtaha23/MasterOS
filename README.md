@@ -8,6 +8,8 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 
 ## Dev team
 - MasterCode Studios
+- gtaha23
+- e0tra
 
 # Screenshots
 
