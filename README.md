@@ -11,6 +11,18 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 - gtaha23
 - e0tra
 
+# Running
+
+## Linux
+- Cosmos
+- .NET
+- VMware
+
+## Windows
+- Cosmos
+- VS2022
+- VMware
+
 # Screenshots
 
 The O.S with yellow text used with color2 command displaying the good ol' oldfetch
