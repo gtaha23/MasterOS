@@ -26,6 +26,10 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 - C# Desktop Development with .NET
 - VMware
 
+# Updates / Logs
+- v0.3.9 Alpha is coming
+- A file system will be added
+
 # Screenshots
 
 The O.S with yellow text used with color2 command displaying the good ol' oldfetch
