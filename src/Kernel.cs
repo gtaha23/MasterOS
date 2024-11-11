@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.IO;
 using Sys = Cosmos.System;
+Sys.FileSystem.CosmosVFS fs = new Cosmos.System.FileSystem.CosmosVFS();
+Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
 namespace MamacOS
 {
     public class Kernel : Sys.Kernel
     {
-        
+
         protected override void BeforeRun()
         {
             Console.Clear();
@@ -50,6 +53,8 @@ namespace MamacOS
                 Console.WriteLine("-> color");
                 Console.WriteLine("-> color2");
                 Console.WriteLine("-> otokarl");
+                Console.WriteLine("-> sfs");
+                Console.WriteLine("-> fst");
                 Console.WriteLine("-> FAQs");
                 Console.WriteLine("=====Game Zone=====");
                 Console.WriteLine("-> Lab0");
@@ -485,6 +490,31 @@ namespace MamacOS
                 else
                 {
                     Console.WriteLine("!! Invalid Command !!");
+                }
+
+            }
+
+            // WARNING THE COMMANDS BELOW İS STILL BEING TESTED, DO NOT INCLUDE TO YOUR VERSION !!
+
+            else if(input == "sfs")
+            {
+                var available_space = fs.GetAvailableFreeSpace(@"0:\");
+                Console.WriteLine("Available Free Space (Bytes): " + available_space);
+            }
+
+            else if(input == "fst")
+            {
+                var fs_type = fs.GetFileSystemType(@"0:\");
+                Console.WriteLine("File System Type: " + fs_type);
+            }
+
+            else if(input == "lof")
+            {
+                var files_list = Directory.GetFiles(@"0:\");
+
+                foreach (var file in files_list)
+                {
+                    Console.WriteLine(file);
                 }
 
             }
