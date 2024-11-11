@@ -16,11 +16,13 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 ## Linux
 - Cosmos
 - .NET
+- C# Desktop Development with .NET
 - VMware
 
 ## Windows
 - Cosmos
-- VS2022
+- VS2013 or newer
+- .NET
 - C# Desktop Development with .NET
 - VMware
 
