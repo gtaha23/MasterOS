@@ -12,7 +12,6 @@ namespace MamacOS
 {
     public class Kernel : Sys.Kernel
     {
-
         protected override void BeforeRun()
         {
             Console.Clear();
@@ -37,7 +36,7 @@ namespace MamacOS
             var input = Console.ReadLine();
             if (input == "help")
             {
-                Console.WriteLine("Last stable version is -> v0.3.8 ");
+                Console.WriteLine("Last stable version is -> v0.3.9 Alpha ");
                 Console.WriteLine("Commands: ");
                 Console.WriteLine("-> help");
                 Console.WriteLine("-> about");
@@ -55,6 +54,8 @@ namespace MamacOS
                 Console.WriteLine("-> otokarl");
                 Console.WriteLine("-> sfs");
                 Console.WriteLine("-> fst");
+                Console.WriteLine("-> lof");
+                Console.WriteLine("-> gdl");
                 Console.WriteLine("-> FAQs");
                 Console.WriteLine("=====Game Zone=====");
                 Console.WriteLine("-> Lab0");
@@ -89,9 +90,9 @@ namespace MamacOS
             {
                 Console.Clear();
                 Console.WriteLine("                    ########  ########    OS Name: MasterOS");
-                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.10");
+                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.13");
                 Console.WriteLine(" ######### ####  ##      ### ######       Creator: MasterCode Studios");
-                Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.3.8 ");
+                Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.3.9 Alpha ");
                 Console.WriteLine("###  ###  #### ##     ### ##    ####      Current File: Kernel.cs");
                 Console.WriteLine("################ ########  ########       Foundation: Master Operating Systems");
                 Console.WriteLine("                                                                   ");
@@ -113,7 +114,7 @@ namespace MamacOS
             else if (input == "command-counter")
             {
                 Console.WriteLine(" *----------------------------*");
-                Console.WriteLine(" 15 commands currently available");
+                Console.WriteLine(" 25 commands currently available");
                 Console.WriteLine(" *----------------------------*");
             }
 
@@ -494,7 +495,7 @@ namespace MamacOS
 
             }
 
-            // WARNING THE COMMANDS BELOW İS STILL BEING TESTED, DO NOT INCLUDE TO YOUR VERSION !!
+            // WARNING THE COMMANDS BELOW IS STILL BEING TESTED, DO NOT INCLUDE TO YOUR VERSION !!
 
             else if(input == "sfs")
             {
@@ -517,6 +518,21 @@ namespace MamacOS
                     Console.WriteLine(file);
                 }
 
+            }
+
+            else if(input == "gdl")
+            {
+                var files_list = Directory.GetFiles(@"0:\");
+                var directory_list = Directory.GetDirectories(@"0:\");
+
+                foreach (var file in files_list)
+                {
+                    Console.WriteLine(file);
+                }
+                foreach (var directory in directory_list)
+                {
+                    Console.WriteLine(directory);
+                }
             }
 
             else
