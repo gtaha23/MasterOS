@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.IO;
 using Sys = Cosmos.System;
-Sys.FileSystem.CosmosVFS fs = new Cosmos.System.FileSystem.CosmosVFS();
-Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
 namespace MamacOS
 {
     public class Kernel : Sys.Kernel
     {
+        Sys.FileSystem.CosmosVFS fs;
+        string current_directory = "0:\\";
         protected override void BeforeRun()
         {
+            fs = new Sys.FileSystem.CosmosVFS();
+            Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
+
             Console.Clear();
             Console.WriteLine("MasterOS Succesfully booted...");
             Console.WriteLine("-----------------------------");
@@ -36,7 +38,7 @@ namespace MamacOS
             var input = Console.ReadLine();
             if (input == "help")
             {
-                Console.WriteLine("Last stable version is -> v0.3.9 Alpha ");
+                Console.WriteLine("Last stable version is -> v0.4.0 ");
                 Console.WriteLine("Commands: ");
                 Console.WriteLine("-> help");
                 Console.WriteLine("-> about");
@@ -90,9 +92,9 @@ namespace MamacOS
             {
                 Console.Clear();
                 Console.WriteLine("                    ########  ########    OS Name: MasterOS");
-                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.13");
+                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.17");
                 Console.WriteLine(" ######### ####  ##      ### ######       Creator: MasterCode Studios");
-                Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.3.9 Alpha ");
+                Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.4.0 ");
                 Console.WriteLine("###  ###  #### ##     ### ##    ####      Current File: Kernel.cs");
                 Console.WriteLine("################ ########  ########       Foundation: Master Operating Systems");
                 Console.WriteLine("                                                                   ");
@@ -495,43 +497,93 @@ namespace MamacOS
 
             }
 
-            // WARNING THE COMMANDS BELOW IS STILL BEING TESTED, DO NOT INCLUDE TO YOUR VERSION !!
 
             else if(input == "sfs")
             {
-                var available_space = fs.GetAvailableFreeSpace(@"0:\");
-                Console.WriteLine("Available Free Space (Bytes): " + available_space);
+                try
+                {
+                    string drive = @"0:\"; 
+                    long availableSpace = Sys.FileSystem.VFS.VFSManager.GetAvailableFreeSpace(drive);
+                    Console.WriteLine($"Available Free Space: {availableSpace / (1024 * 1024)} MB");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error retrieving available space: {ex.Message}");
+                }
             }
 
             else if(input == "fst")
             {
-                var fs_type = fs.GetFileSystemType(@"0:\");
-                Console.WriteLine("File System Type: " + fs_type);
+                try
+                {
+                    var fileSystemType = Sys.FileSystem.VFS.VFSManager.GetFileSystemType(current_directory);
+                    Console.WriteLine($"File System Type: {fileSystemType}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error retrieving file system type: {ex.Message}");
+                }
             }
 
             else if(input == "lof")
             {
-                var files_list = Directory.GetFiles(@"0:\");
-
-                foreach (var file in files_list)
+                try
                 {
-                    Console.WriteLine(file);
+                    string directory = "0:\\";
+
+                    if (!Sys.FileSystem.VFS.VFSManager.DirectoryExists(directory))
+                    {
+                        Console.WriteLine($"Directory '{directory}' not found.");
+                        return;
+                    }
+
+                    var directoryEntries = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(directory);
+
+                    bool filesFound = false;
+                    foreach (var entry in directoryEntries)
+                    {
+                        if (entry.mSize > 0) 
+                        {
+                            Console.WriteLine($"File: {entry.mName}");
+                            filesFound = true;
+                        }
+                    }
+
+                    if (!filesFound)
+                    {
+                        Console.WriteLine("No files found in the directory.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error listing files: {ex.Message}");
                 }
 
             }
 
             else if(input == "gdl")
             {
-                var files_list = Directory.GetFiles(@"0:\");
-                var directory_list = Directory.GetDirectories(@"0:\");
+                try
+                {
+                    var directoryPath = @"0:\\"; 
+                    var entries = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(directoryPath);
 
-                foreach (var file in files_list)
-                {
-                    Console.WriteLine(file);
+                    Console.WriteLine("Directory Listing:");
+                    foreach (var entry in entries)
+                    {
+                        if (entry.mEntryType == Sys.FileSystem.Listing.DirectoryEntryTypeEnum.File)
+                        {
+                            Console.WriteLine($"File: {entry.mName}");
+                        }
+                        else if (entry.mEntryType == Sys.FileSystem.Listing.DirectoryEntryTypeEnum.Directory)
+                        {
+                            Console.WriteLine($"Directory: {entry.mName}");
+                        }
+                    }
                 }
-                foreach (var directory in directory_list)
+                catch (Exception ex)
                 {
-                    Console.WriteLine(directory);
+                    Console.WriteLine($"Error retrieving directory listing: {ex.Message}");
                 }
             }
 
