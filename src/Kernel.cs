@@ -81,7 +81,10 @@ namespace MamacOS
 
             else if (input == "info")
             {
-                Console.WriteLine("The OS is built by COSMOS using C#, although the developers doesn't know C#, they managed to write some commands!");
+                Console.WriteLine("The OS is built by COSMOS using C#,");
+                Console.WriteLine("It is an FOSS project and can be edited by its users freely!");
+                Console.WriteLine("The Dev team wants the satisfaction of the users, not money.");
+                Console.WriteLine("And again we say, Thanks for choosing mOS !");
             }
 
             else if (input == "oldfetch")
