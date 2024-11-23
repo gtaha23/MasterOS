@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using Sys = Cosmos.System;
 
 namespace MamacOS
@@ -38,7 +34,7 @@ namespace MamacOS
             var input = Console.ReadLine();
             if (input == "help")
             {
-                Console.WriteLine("Last stable version is -> v0.4.0 ");
+                Console.WriteLine("Last stable version is -> v0.4.1 ");
                 Console.WriteLine("Commands: ");
                 Console.WriteLine("-> help");
                 Console.WriteLine("-> about");
@@ -67,7 +63,7 @@ namespace MamacOS
             {
                 Console.WriteLine("MasterOS is an TUI based small but stable Operating System.");
                 Console.WriteLine("This OS is currently being developed by mOS, and the project is open source.");
-                Console.WriteLine("Current version of it is v0.3.8  (Because due to migration to C#).");
+                Console.WriteLine("Current version of it is v0.4.1  .");
                 Console.WriteLine("To see more updates, stay tuned!");
             }
 
@@ -92,9 +88,9 @@ namespace MamacOS
             {
                 Console.Clear();
                 Console.WriteLine("                    ########  ########    OS Name: MasterOS");
-                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.17");
+                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.18");
                 Console.WriteLine(" ######### ####  ##      ### ######       Creator: MasterCode Studios");
-                Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.4.0 ");
+                Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.4.1 ");
                 Console.WriteLine("###  ###  #### ##     ### ##    ####      Current File: Kernel.cs");
                 Console.WriteLine("################ ########  ########       Foundation: Master Operating Systems");
                 Console.WriteLine("                                                                   ");
@@ -469,6 +465,7 @@ namespace MamacOS
                 Console.WriteLine("1- What is MasterOS");
                 Console.WriteLine("2- How to create an OS");
                 Console.WriteLine("3- What are these OSes");
+                Console.WriteLine("Type exit to quit FAQs menu");
                 Console.Write("-=> ");
                 var faq_input = Console.ReadLine();
 
@@ -488,6 +485,11 @@ namespace MamacOS
                 else if (faq_input == "3")
                 {
                     Console.WriteLine("The OSes are used to contact the hardware for using the software.");
+                }
+
+                else if(faq_input == "exit")
+                {
+                    Console.WriteLine("Exiting. . . ");
                 }
 
                 else
