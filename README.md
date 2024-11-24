@@ -36,13 +36,13 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 - Note: This statistics are not tested !!
 
 # Updates / Logs
-- v0.4.1 Update!
+- v0.4.3 Update!
 - The file system is completed
-- Some minor updates added (exit to FAQs)
-- Deleted the unused libraries (bloatware)
+- The I/O for file system is migrated to Cosmos compatible APIs
+- Added read/write commands
 
 # Spoilers
-- We will try to add read/write functions to the VFS
+- We will try to add a sudoku game
 - In further updates lab0 will be finished!
   
 # Screenshots
