@@ -28,6 +28,13 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 - C# Desktop Development with .NET
 - VMware
 
+## System Requirements
+- 125 MB Hard Disk
+- 128 MB RAM
+- Any 1 Core or more x86 / amd64 CPU
+- Any GPU
+- Note: This statistics are not tested !!
+
 # Updates / Logs
 - v0.4.1 Update!
 - The file system is completed
