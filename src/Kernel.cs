@@ -791,7 +791,7 @@ namespace MamacOS
                 Console.WriteLine("v0.3.8 / 13.10.2024 \\");
                 Console.WriteLine("v0.3.9 Alpha / 11.11.2024 \\");
                 Console.WriteLine("v0.4.0 - v0.4.1 / 23.11.2024 \\");
-                Console.WriteLine("v0.4.2 - v0.4.3 /24.11.2024");
+                Console.WriteLine("v0.4.2 - v0.4.3 / 24.11.2024 \\");
                 Console.WriteLine("Coming Soon...");
                 Console.WriteLine("");
             }
