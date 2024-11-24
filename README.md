@@ -15,6 +15,7 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 
 ## Linux
 - Cosmos
+- Wine
 - .NET
 - C# Desktop Development with .NET
 - VMware
@@ -33,6 +34,10 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 - Some minor updates added (exit to FAQs)
 - Deleted the unused libraries (bloatware)
 
+# Spoilers
+- We will try to add read/write functions to the VFS
+- In further updates lab0 will be finished!
+  
 # Screenshots
 
 The O.S with yellow text used with color2 command displaying the good ol' oldfetch
