@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Sys = Cosmos.System;
 
 namespace MamacOS
@@ -34,7 +35,7 @@ namespace MamacOS
             var input = Console.ReadLine();
             if (input == "help")
             {
-                Console.WriteLine("Last stable version is -> v0.4.1 ");
+                Console.WriteLine("Last stable version is -> v0.4.3 ");
                 Console.WriteLine("Commands: ");
                 Console.WriteLine("-> help");
                 Console.WriteLine("-> about");
@@ -54,6 +55,11 @@ namespace MamacOS
                 Console.WriteLine("-> fst");
                 Console.WriteLine("-> lof");
                 Console.WriteLine("-> gdl");
+                Console.WriteLine("-> waf");
+                Console.WriteLine("-> raf");
+                Console.WriteLine("-> cad");
+                Console.WriteLine("-> dad");
+                Console.WriteLine("-> logs");
                 Console.WriteLine("-> FAQs");
                 Console.WriteLine("=====Game Zone=====");
                 Console.WriteLine("-> Lab0");
@@ -91,9 +97,9 @@ namespace MamacOS
             {
                 Console.Clear();
                 Console.WriteLine("                    ########  ########    OS Name: MasterOS");
-                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.18");
+                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.23");
                 Console.WriteLine(" ######### ####  ##      ### ######       Creator: MasterCode Studios");
-                Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.4.1 ");
+                Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.4.3");
                 Console.WriteLine("###  ###  #### ##     ### ##    ####      Current File: Kernel.cs");
                 Console.WriteLine("################ ########  ########       Foundation: Master Operating Systems");
                 Console.WriteLine("                                                                   ");
@@ -115,7 +121,7 @@ namespace MamacOS
             else if (input == "command-counter")
             {
                 Console.WriteLine(" *----------------------------*");
-                Console.WriteLine(" 25 commands currently available");
+                Console.WriteLine(" 30 commands currently available");
                 Console.WriteLine(" *----------------------------*");
             }
 
@@ -590,6 +596,204 @@ namespace MamacOS
                 {
                     Console.WriteLine($"Error retrieving directory listing: {ex.Message}");
                 }
+            }
+
+            else if (input == "waf")
+            {
+                try
+                {
+                    Console.Write("Enter file path (e.g., 0:\\filename.txt): ");
+                    string path = Console.ReadLine();
+
+                    Console.Write("Enter content to write: ");
+                    string content = Console.ReadLine();
+
+                    var file = Sys.FileSystem.VFS.VFSManager.GetFile(path);
+                    if (file == null)
+                    {
+                        Sys.FileSystem.VFS.VFSManager.CreateFile(path);
+                        file = Sys.FileSystem.VFS.VFSManager.GetFile(path);
+                    }
+
+                    using (var stream = file.GetFileStream())
+                    {
+                        stream.Position = 0;
+
+                        byte[] contentBytes = Encoding.ASCII.GetBytes(content);
+                        stream.Write(contentBytes, 0, contentBytes.Length);
+
+                        stream.SetLength(contentBytes.Length);
+                    }
+
+                    Console.WriteLine($"Successfully wrote to file: {path}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error writing to file: {ex.Message}");
+                }
+            }
+
+            else if (input == "raf")
+            {
+                try
+                {
+                    Console.Write("Enter file path (e.g., 0:\\filename.txt): ");
+                    string path = Console.ReadLine();
+
+                    var file = Sys.FileSystem.VFS.VFSManager.GetFile(path);
+                    if (file == null)
+                    {
+                        Console.WriteLine("File not found.");
+                        return;
+                    }
+
+                    using (var stream = file.GetFileStream())
+                    {
+                        byte[] buffer = new byte[stream.Length];
+                        stream.Read(buffer, 0, (int)stream.Length);
+
+                        string content = Encoding.ASCII.GetString(buffer);
+
+                        Console.WriteLine($"Contents of {path}: ");
+                        Console.WriteLine(content);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error reading from file: {ex.Message}");
+                }
+            }
+
+            else if(input == "daf")
+            {
+                try
+                {
+                    Console.Write("Enter file path (e.g., 0:\\filename.txt): ");
+                    string path = Console.ReadLine();
+
+                    var file = Sys.FileSystem.VFS.VFSManager.GetFile(path);
+                    if (file == null)
+                    {
+                        Console.WriteLine("File doesn't exist / empty");
+                        return;
+                    }
+
+                    Sys.FileSystem.VFS.VFSManager.DeleteFile(path);
+                    Console.WriteLine($"{path} succesfully deleted !");
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error deleting the file! {ex.Message}");
+                }
+            }
+
+            else if(input == "dad")
+            {
+                try
+                {
+                    bool choice = false;
+                    Console.Write("Enter directory path (e.g., 0:\\directoryname): ");
+                    string path = Console.ReadLine();
+                    Console.Write("Are you sure? (y/n): ");
+                    string x = Console.ReadLine().ToLower();
+                    if (x == "y")
+                    {
+                        choice = true;
+                    }
+                    else
+                    {
+                        choice = false;
+                    }
+
+                    var dir = Sys.FileSystem.VFS.VFSManager.GetDirectory(path);
+                    if (!Sys.FileSystem.VFS.VFSManager.DirectoryExists(path))
+                    {
+                        Console.WriteLine("Directory does not exists!! ");
+                        return;
+                    }
+
+                    var files = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(path);
+                    if (files.Count > 0)
+                    {
+                        Console.WriteLine($"Directory is not empty: {path}");
+                        return;
+                    }
+
+                    Sys.FileSystem.VFS.VFSManager.DeleteDirectory(path, choice);
+                    Console.WriteLine($"Successfully removed directory: {path}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error removing directory: {ex.Message}");
+                }
+
+            }
+
+            else if(input == "cad")
+            {
+                try
+                {
+                    Console.Write("Enter the directory path to create (e.g., 0:\\newdirectory): ");
+                    string path = Console.ReadLine();
+
+                    if (Sys.FileSystem.VFS.VFSManager.DirectoryExists(path))
+                    {
+                        Console.WriteLine($"Directory already exists: {path}");
+                        return;
+                    }
+
+                    Sys.FileSystem.VFS.VFSManager.CreateDirectory(path);
+                    Console.WriteLine($"Successfully created directory: {path}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error creating directory: {ex.Message}");
+                }
+            }
+
+            else if(input == "don pollo")
+            {
+                Console.Clear();
+                Console.WriteLine("Lingangu lingangu lingan lingan guu,");
+                Console.WriteLine("Lingan guli guli wacha lingan lingangu HEY !");
+            }
+
+            // Don't forget to add the new versions
+            else if(input == "logs")
+            {
+                Console.WriteLine("------ Batchfile O.S ------");
+                Console.WriteLine("First Creation / 19.04.2024 \\");
+                Console.WriteLine("v0.0.1 / 21.04.2024 \\");
+                Console.WriteLine("v0.0.2 / 26.05.2024 \\");
+                Console.WriteLine("v0.0.3 / 12.06.2024 \\");
+                Console.WriteLine("v0.0.4 - v0.0.6 / 13.06.2024 \\");
+                Console.WriteLine("v0.0.7 - v0.0.8 / 14.06.2024 \\");
+                Console.WriteLine("v0.0.9 / 15.06.2024 \\");
+                Console.WriteLine("v0.1.0 / 17.06.2024 \\");
+                Console.WriteLine("v0.1.1 - v0.1.2 / 22.06.2024 \\");
+                Console.WriteLine("v0.1.3 - v0.1.4 / 23.06.2024 \\");
+                Console.WriteLine("v0.1.5 / 24.06.2024 \\");
+                Console.WriteLine("v0.1.6 / 26.06.2024 \\");
+                Console.WriteLine("v0.1.7 / 28.06.2024 \\");
+                Console.WriteLine("v0.1.8 / 30.06.2024 \\");
+                Console.WriteLine("v0.1.9 / 01.07.2024 \\");
+                Console.WriteLine("v0.2.0 / 02.07.2024 \\");
+                Console.WriteLine("v0.2.1 / 03.07.2024 \\");
+                Console.WriteLine("v0.2.2 - v0.2.4 / 04.07.2024 \\");
+                Console.WriteLine("v0.2.5 - v0.2.7 / 05.07.2024 \\");
+                Console.WriteLine("v0.2.8 / 06.07.2024 \\");
+                Console.WriteLine("v0.2.9 / 09.07.2024 \\");
+                Console.WriteLine("v0.3.0 - v0.3.1 / 28.07.2024 \\");
+                Console.WriteLine("v0.3.2 - v0.3.4 / 29.07.2024 \\");
+                Console.WriteLine("v0.3.5 - v0.3.7 / Migration to C# \\");
+                Console.WriteLine("------ C-Sharp O.S ------");
+                Console.WriteLine("v0.3.8 / 13.10.2024 \\");
+                Console.WriteLine("v0.3.9 Alpha / 11.11.2024 \\");
+                Console.WriteLine("v0.4.0 - v0.4.1 / 23.11.2024 \\");
+                Console.WriteLine("v0.4.2 - v0.4.3 /24.11.2024");
+                Console.WriteLine("Coming Soon...");
+                Console.WriteLine("");
             }
 
             else
