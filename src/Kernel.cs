@@ -35,7 +35,7 @@ namespace MamacOS
             var input = Console.ReadLine();
             if (input == "help")
             {
-                Console.WriteLine("Last stable version is -> v0.4.3 ");
+                Console.WriteLine("Last stable version is -> v0.4.5 ");
                 Console.WriteLine("Commands: ");
                 Console.WriteLine("-> help");
                 Console.WriteLine("-> about");
@@ -57,9 +57,12 @@ namespace MamacOS
                 Console.WriteLine("-> gdl");
                 Console.WriteLine("-> waf");
                 Console.WriteLine("-> raf");
+                Console.WriteLine("-> daf");
                 Console.WriteLine("-> cad");
                 Console.WriteLine("-> dad");
                 Console.WriteLine("-> logs");
+                Console.WriteLine("-> cd ");
+                Console.WriteLine("-> spin");
                 Console.WriteLine("-> FAQs");
                 Console.WriteLine("=====Game Zone=====");
                 Console.WriteLine("-> Lab0");
@@ -69,7 +72,7 @@ namespace MamacOS
             {
                 Console.WriteLine("MasterOS is an TUI based small but stable Operating System.");
                 Console.WriteLine("This OS is currently being developed by mOS, and the project is open source.");
-                Console.WriteLine("Current version of it is v0.4.1  .");
+                Console.WriteLine("Current version of it is v0.4.4  .");
                 Console.WriteLine("To see more updates, stay tuned!");
             }
 
@@ -97,9 +100,9 @@ namespace MamacOS
             {
                 Console.Clear();
                 Console.WriteLine("                    ########  ########    OS Name: MasterOS");
-                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.23");
+                Console.WriteLine("######## #####    ###    ### ###    ##    Kernel Version: v0.24");
                 Console.WriteLine(" ######### ####  ##      ### ######       Creator: MasterCode Studios");
-                Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.4.3");
+                Console.WriteLine(" ###  ###  #### ###     ###    ######     Current Version: v0.4.4");
                 Console.WriteLine("###  ###  #### ##     ### ##    ####      Current File: Kernel.cs");
                 Console.WriteLine("################ ########  ########       Foundation: Master Operating Systems");
                 Console.WriteLine("                                                                   ");
@@ -121,7 +124,7 @@ namespace MamacOS
             else if (input == "command-counter")
             {
                 Console.WriteLine(" *----------------------------*");
-                Console.WriteLine(" 30 commands currently available");
+                Console.WriteLine(" 32 commands currently available");
                 Console.WriteLine(" *----------------------------*");
             }
 
@@ -575,9 +578,8 @@ namespace MamacOS
             else if(input == "gdl")
             {
                 try
-                {
-                    var directoryPath = @"0:\\"; 
-                    var entries = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(directoryPath);
+                { 
+                    var entries = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(current_directory);
 
                     Console.WriteLine("Directory Listing:");
                     foreach (var entry in entries)
@@ -792,8 +794,80 @@ namespace MamacOS
                 Console.WriteLine("v0.3.9 Alpha / 11.11.2024 \\");
                 Console.WriteLine("v0.4.0 - v0.4.1 / 23.11.2024 \\");
                 Console.WriteLine("v0.4.2 - v0.4.3 / 24.11.2024 \\");
+                Console.WriteLine("v0.4.4 - v0.4.5 / 25.11.2024 \\");
                 Console.WriteLine("Coming Soon...");
                 Console.WriteLine("");
+            }
+
+            else if (input == "spin")
+            {
+                Console.Write("Enter spin duration in seconds: ");
+                if (!int.TryParse(Console.ReadLine(), out int durationSeconds))
+                {
+                    Console.WriteLine("Invalid duration. Please enter a valid number.");
+                    return;
+                }
+
+                int totalFrames = durationSeconds * 10;
+                string[] spinnerFrames = { "|", "/", "-", "\\" };
+
+                for (int i = 0; i < totalFrames; i++)
+                {
+                    string frame = spinnerFrames[i % spinnerFrames.Length];
+
+                    Console.Write($"\r{frame}");
+
+                    System.Threading.Thread.Sleep(100);
+                }
+
+                Console.Write("\r ");
+                Console.WriteLine("Spin complete.");
+            }
+
+            else if (input.StartsWith("cd "))
+            {
+                try
+                {
+                    var targetDir = input.Substring(3).Trim();
+
+                    if (targetDir == "..")
+                    {
+                        if (current_directory.LastIndexOf('\\') > 2)
+                        {
+                            current_directory = current_directory.Substring(0, current_directory.LastIndexOf('\\'));
+                        }
+                        else
+                        {
+                            current_directory = "0:\\";
+                        }
+                        Console.WriteLine($"Changed directory to: {current_directory}");
+                    }
+                    else if (targetDir == "\\")
+                    {
+                        current_directory = "0:\\";
+                        Console.WriteLine($"Changed directory to: {current_directory}");
+                    }
+                    else
+                    {
+                        var potentialDir = current_directory.EndsWith("\\")
+                            ? current_directory + targetDir
+                            : current_directory + "\\" + targetDir;
+
+                        if (Sys.FileSystem.VFS.VFSManager.DirectoryExists(potentialDir))
+                        {
+                            current_directory = potentialDir;
+                            Console.WriteLine($"Changed directory to: {current_directory}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Directory not found: {potentialDir}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error changing directory: {ex.Message}");
+                }
             }
 
             else
