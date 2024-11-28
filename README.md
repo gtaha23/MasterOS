@@ -1,3 +1,6 @@
+# ! Warning !
+The developers halted the project to focus on learning C# so they can add more commands easily, Thank you for your patience.
+
 # MasterOS
 Think of an operating system that is lightweight, built in .net Framework, and open source!
 Well you just met MasterOS.
@@ -13,7 +16,7 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 
 # Running
 
-## Linux
+## Linux (Beta)
 - Cosmos
 - Wine
 - .NET
