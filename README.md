@@ -17,6 +17,7 @@ then we built it with C# using the C.O.S.M.O.S toolkit to create an actual Opera
 # Running
 
 ## Linux (Beta)
+IL2CPU can't work on Linux so be aware of the consequences
 - Cosmos
 - Wine
 - .NET
