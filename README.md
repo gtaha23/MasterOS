@@ -1,5 +1,6 @@
 # ! Warning !
-The developers halted the project to focus on learning C# so they can add more commands easily, Thank you for your patience.
+The devs are working on a real OS, we are using C & Assembly. The project will be published once we finish the basics.
+Thank you for your patience.
 
 # MasterOS
 Think of an operating system that is lightweight, built in .net Framework, and open source!
