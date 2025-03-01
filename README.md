@@ -1,5 +1,5 @@
 # ! Warning !
-The devs are working on a real OS, we are using C & Assembly. The project will be published once we finish the basics.
+The devs are working on a real OS, we are using C & Assembly / Rust. The project will be published once we finish the basics.
 Thank you for your patience.
 
 # MasterOS
